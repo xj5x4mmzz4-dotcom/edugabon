@@ -1,0 +1,15 @@
+const fetchResults = async () => {
+  const { data, error } = await supabase
+    .from('quiz_results')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error("Supabase Error:", error);
+    alert("Erreur de connexion à la base de données");
+  } else {
+    console.log("Loaded results:", data);
+    setResults(data || []);
+  }
+  setLoading(false);
+};
